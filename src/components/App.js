@@ -3,6 +3,8 @@ import api from '../api/tv-api'
 import { Switch, Route } from 'react-router-dom'
 import Layout from './Layout'
 import Home from '../views/Home'
+import ShowDetails from '../views/ShowDetails'
+import MoviesPage from '../views/MoviesPage'
 
 
 const func = () => {
@@ -14,6 +16,8 @@ const func = () => {
         <Layout>
             <Switch>
                 <Route path={'/'} exact component={Home} />
+                <Route path={'/movies'} exact component={MoviesPage}/>
+                <Route path={'/movies/:movieId'} component={ShowDetails} />
             </Switch>
         </Layout>
     )

@@ -22,6 +22,15 @@ const Navigation = () => (
         Shows
       </NavLink>
     </li>
+    <li>
+      <NavLink
+        className="Navigation-link"
+        activeClassName="Navigation-link-active"
+        to={'/movies'}
+      >
+        Movies
+      </NavLink>
+    </li>
   </ul>
 );
 

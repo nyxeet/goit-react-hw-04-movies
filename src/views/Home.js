@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import api from '../api/tv-api'
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
     state = {
@@ -16,7 +17,13 @@ class Home extends Component {
                 <h1>Добро пожаловать!</h1>
                 <ul>
                 {shows && shows.map(elem => {
-                    return <li key={elem.id}>{elem.title}</li>
+                    return (
+                    <li key={elem.id}>
+                        <Link to = {{
+                            pathname: `/movies/${elem.id}`, state: { from: this.props.location }, 
+                        }}>{elem.title}
+                        </Link>
+                    </li> )
                 })}
                 </ul>
             </div>

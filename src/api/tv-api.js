@@ -2,13 +2,12 @@ const baseURL = 'https://api.themoviedb.org';
 const API_KEY = '7f708811f1643542b21c8f4bf6e8e2f6';
 
 const fetchShowDetails = showId => {
-  return fetch(`${baseURL}/shows/${showId}`).then(res => res.json());
+  return fetch(`${baseURL}/3/movie/${showId}?&api_key=${API_KEY}`).then(res => res.json());
 };
 
 const fetchShowWithQuery = searchQuery => {
   return fetch(`${baseURL}/3/search/movie?query=${searchQuery}&api_key=${API_KEY}`)
     .then(res => res.json())
-    .then(entries => entries.map(entry => entry.show));
 };
 
 const fetchPopular = () => {
