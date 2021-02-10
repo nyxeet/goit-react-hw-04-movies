@@ -4,6 +4,8 @@ import Layout from './Layout'
 import Home from '../views/Home'
 import ShowDetails from '../views/ShowDetails'
 import MoviesPage from '../views/MoviesPage'
+import Cast from '../views/Cast'
+import Reviews from '../views/Reviews'
 
 
 const func = () => {
@@ -16,7 +18,9 @@ const func = () => {
             <Switch>
                 <Route path={'/'} exact component={Home} />
                 <Route path={'/movies'} exact component={MoviesPage}/>
-                <Route path={'/movies/:movieId'} component={ShowDetails} />
+                <Route path={'/movies/:movieId'} exact  component={ShowDetails} />
+                <Route path={'/movies/:movieId/cast'} component={Cast} />
+                <Route path={'/movies/:movieId/reviews'} component={Reviews} />
             </Switch>
         </Layout>
     )
