@@ -1,5 +1,4 @@
 import React from 'react'
-import api from '../api/tv-api'
 import { Switch, Route } from 'react-router-dom'
 import Layout from './Layout'
 import Home from '../views/Home'

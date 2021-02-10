@@ -21,7 +21,7 @@ class Home extends Component {
                     <li key={elem.id}>
                         <Link to = {{
                             pathname: `/movies/${elem.id}`, state: { from: this.props.location }, 
-                        }}>{elem.title}
+                        }}>{elem.original_title}
                         </Link>
                     </li> )
                 })}
