@@ -1,11 +1,7 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Layout from './Layout'
-import Home from '../views/Home'
-import ShowDetails from '../views/ShowDetails'
-import MoviesPage from '../views/MoviesPage'
-import Cast from '../views/Cast'
-import Reviews from '../views/Reviews'
+import routes from '../routes'
 
 
 const func = () => {
@@ -15,13 +11,13 @@ const func = () => {
     
     return (
         <Layout>
-            <Switch>
-                <Route path={'/'} exact component={Home} />
-                <Route path={'/movies'} exact component={MoviesPage}/>
-                <Route path={'/movies/:movieId'} exact  component={ShowDetails} />
-                <Route path={'/movies/:movieId/cast'} component={Cast} />
-                <Route path={'/movies/:movieId/reviews'} component={Reviews} />
-            </Switch>
+            <Suspense fallback={<h1>Loading...</h1>}>
+                <Switch>
+                    {routes.map(route => (
+                        <Route key={route.path} {...route} />
+                    ))}
+                </Switch>
+            </Suspense>
         </Layout>
     )
 }
