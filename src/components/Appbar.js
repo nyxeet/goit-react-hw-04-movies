@@ -2,7 +2,7 @@ import React from 'react';
 import Navigation from './Navigation';
 
 const Appbar = () => (
-  <header>
+  <header className="AppBar">
     <Navigation />
   </header>
 );

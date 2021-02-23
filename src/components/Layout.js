@@ -1,5 +1,5 @@
-import React from 'react'
-import Appbar from './Appbar'
+import React from 'react';
+import Appbar from './Appbar';
 
 const styles = {
   maxWidth: 1170,
@@ -12,7 +12,6 @@ const styles = {
 const Layout = ({ children }) => (
   <div style={styles}>
     <Appbar />
-    <hr />
     {children}
   </div>
 );

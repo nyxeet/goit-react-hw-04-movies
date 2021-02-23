@@ -1,35 +1,43 @@
 import React, { Component } from 'react';
-import api from '../api/tv-api'
+import api from '../api/tv-api';
 import { Link } from 'react-router-dom';
 
 class Home extends Component {
-    state = {
-        shows: null,
-    }
-    componentDidMount() {
-        api.fetchPopular().then(shows => this.setState({shows: shows.results}))
-    }
-    
-    render() {
-        const { shows } = this.state;
-        return (
-            <div>
-                <h1>Добро пожаловать!</h1>
-                <ul>
-                {shows && shows.map(elem => {
-                    return (
-                    <li key={elem.id}>
-                        <Link to = {{
-                            pathname: `/movies/${elem.id}`, state: { from: this.props.location }, 
-                        }}>{elem.original_title}
-                        </Link>
-                    </li> )
-                })}
-                </ul>
-            </div>
-        )
-    }
-  
-};
+  state = {
+    shows: null,
+  };
+  componentDidMount() {
+    api.fetchPopular().then(shows => this.setState({ shows: shows.results }));
+  }
+
+  render() {
+    const { shows } = this.state;
+    const defaultImgUrl = `https://image.tmdb.org/t/p/w500`;
+    return (
+      <div className="HomeView">
+        <h1 className="MoviesTitle">Топ 20 фильмов!</h1>
+        <ul className="MovieList">
+          {shows &&
+            shows.map(show => {
+              return (
+                <li key={show.id} className="MovieItem">
+                  <Link
+                    to={{
+                      pathname: `/movies/${show.id}`,
+                      state: { from: this.props.location },
+                    }}
+                  >
+                    <img src={defaultImgUrl + show.poster_path} />
+                    {show.original_title}
+                    {show.original_name}
+                  </Link>
+                </li>
+              );
+            })}
+        </ul>
+      </div>
+    );
+  }
+}
 
 export default Home;
