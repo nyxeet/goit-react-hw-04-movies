@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 
-export default [
+const mainRoutes = [
   {
     path: '/',
     label: 'Home',
@@ -26,3 +26,26 @@ export default [
     ),
   },
 ];
+const detailsRoutes = [
+  {
+    path: '/movies/:movieId/cast',
+    label: 'Cast',
+    exact: true,
+    component: lazy(() =>
+      import('./views/Cast' /* webpackChunkName: "home-page" */),
+    ),
+  },
+  {
+    path: '/movies/:movieId/reviews',
+    label: 'Reviews',
+    exact: true,
+    component: lazy(() =>
+      import('./views/Reviews' /* webpackChunkName: "movies" */),
+    ),
+  },
+];
+
+export default {
+  mainRoutes,
+  detailsRoutes,
+};

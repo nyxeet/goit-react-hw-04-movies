@@ -1,7 +1,8 @@
 import React, { Suspense, Component, lazy } from 'react';
 import api from '../api/tv-api';
 import { Switch, Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import routes from '../routes';
 
 class ShowDetails extends Component {
   state = {
@@ -15,12 +16,6 @@ class ShowDetails extends Component {
   render() {
     const { show } = this.state;
     const defaultImgUrl = `https://image.tmdb.org/t/p/w500`;
-    const lazyCast = lazy(() =>
-      import('./Cast' /* webpackChunkName: "cast" */),
-    );
-    const lazyReviews = lazy(() =>
-      import('./Reviews' /* webpackChunkName: "reviews" */),
-    );
     return (
       <div>
         {show && (
@@ -30,29 +25,34 @@ class ShowDetails extends Component {
               {show.original_title}
               {show.original_name}
             </h1>
-            <Link
-              to={{
-                pathname: `/movies/${show.id}/cast`,
-                state: { from: this.props.location },
-              }}
-            >
-              <p>cast</p>
-            </Link>
-            <Link
-              to={{
-                pathname: `/movies/${show.id}/reviews`,
-                state: { from: this.props.location },
-              }}
-            >
-              <p>reviews</p>
-            </Link>
+            <nav className="nav nav-pills">
+              <NavLink
+                className="nav-link"
+                activeClassName="active"
+                to={{
+                  pathname: `/movies/${show.id}/cast`,
+                  state: { from: this.props.location },
+                }}
+              >
+                <p>cast</p>
+              </NavLink>
+              <NavLink
+                className="nav-link"
+                activeClassName="active"
+                to={{
+                  pathname: `/movies/${show.id}/reviews`,
+                  state: { from: this.props.location },
+                }}
+              >
+                <p>reviews</p>
+              </NavLink>
+            </nav>
             <Suspense fallback={<h1>Loading...</h1>}>
-              <Route path="/movies/:movieId/cast" exact component={lazyCast} />
-              <Route
-                path="/movies/:movieId/reviews"
-                exact
-                component={lazyReviews}
-              />
+              <Switch>
+                {routes.detailsRoutes.map(route => (
+                  <Route key={route.path} {...route} />
+                ))}
+              </Switch>
             </Suspense>
           </div>
         )}
