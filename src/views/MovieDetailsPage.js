@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Suspense, Component, lazy } from 'react';
 import api from '../api/tv-api';
+import { Switch, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 class ShowDetails extends Component {
@@ -14,6 +15,12 @@ class ShowDetails extends Component {
   render() {
     const { show } = this.state;
     const defaultImgUrl = `https://image.tmdb.org/t/p/w500`;
+    const lazyCast = lazy(() =>
+      import('./Cast' /* webpackChunkName: "cast" */),
+    );
+    const lazyReviews = lazy(() =>
+      import('./Reviews' /* webpackChunkName: "reviews" */),
+    );
     return (
       <div>
         {show && (
@@ -39,6 +46,14 @@ class ShowDetails extends Component {
             >
               <p>reviews</p>
             </Link>
+            <Suspense fallback={<h1>Loading...</h1>}>
+              <Route path="/movies/:movieId/cast" exact component={lazyCast} />
+              <Route
+                path="/movies/:movieId/reviews"
+                exact
+                component={lazyReviews}
+              />
+            </Suspense>
           </div>
         )}
       </div>
