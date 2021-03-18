@@ -18,7 +18,7 @@ const mainRoutes = [
     ),
   },
   {
-    path: '/movies/:movieId',
+    path: `/movies/:movieId`,
     label: 'Home',
     exact: false,
     component: lazy(() =>

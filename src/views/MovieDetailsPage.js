@@ -9,9 +9,20 @@ class ShowDetails extends Component {
     show: null,
   };
   componentDidMount() {
-    api
-      .fetchShowDetails(this.props.match.params.movieId)
-      .then(show => this.setState({ show }));
+    const { location, match } = this.props;
+
+    const pathnameArray = location.pathname.split('/');
+    const lastElem = pathnameArray[pathnameArray.length - 1];
+
+    console.log(lastElem);
+    console.log(match.params.movieId);
+
+    (parseInt(lastElem) == match.params.movieId ||
+      lastElem === 'cast' ||
+      lastElem === 'reviews') &&
+      api
+        .fetchShowDetails(match.params.movieId)
+        .then(show => this.setState({ show }));
   }
   render() {
     const { show } = this.state;
